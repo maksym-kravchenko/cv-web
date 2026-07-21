@@ -23,5 +23,7 @@
 		// Enable image optimization
 		// see https://opennext.js.org/cloudflare/howtos/image
 		"binding": "IMAGES"
-	}
+	},
+	"workers_dev": false,
+	"preview_urls": true
 }
