@@ -1,17 +1,37 @@
 import {useTranslations} from 'next-intl'
-import {Briefcase, CalendarDays} from 'lucide-react'
+import {Briefcase, CalendarDays, SquareArrowOutUpRight} from 'lucide-react'
 import {projects} from '@/data/cv'
 import {richTags} from '@/utils/rich'
 import {beatBucherStacks} from '@/data/cv'
+import type {Stack} from '@/data/cv'
 import {SectionHeader} from './SectionHeader'
 import {StackBlock} from './StackBlock'
 import cm from "@/utils/cm";
+
+const teaserProjects: { title: string; desc: string; stacks: Stack[] }[] = [
+    {
+        title: 'Some Placeholder Project',
+        desc: 'This is a placeholder project. So, if you can read this, you\'re most likely a bot or some curious developer who deleted my blur',
+        stacks: [
+            {labelKey: 'frontend', tech: ['react', 'typescript', 'tailwindcss']},
+            {labelKey: 'backend', tech: ['dotnet', 'csharp', 'sqlserver', 'swagger']},
+        ],
+    },
+    {
+        title: 'Another Project',
+        desc: 'One again: this is a placeholder project. So, please leave it be.',
+        stacks: [
+            {labelKey: 'frontend', tech: ['nextdotjs', 'react', 'tailwindcss']},
+            {labelKey: 'backend', tech: ['laravel', 'php', 'mysql', 'docker']},
+        ],
+    },
+]
 
 function PeriodPill({period}: { period: string }) {
     return (
         <span
             className="inline-flex w-fit items-center gap-1.5 whitespace-nowrap rounded-full border border-[#bfe9f5] bg-accent-soft px-2.5 py-1 font-mono text-xs font-medium text-accent-ink">
-      <CalendarDays className="h-3 w-3" strokeWidth={2}/>
+      <CalendarDays className="h-4 w-4" strokeWidth={2}/>
             {period}
     </span>
     )
@@ -93,16 +113,34 @@ export function ExperienceSection() {
                         </div>
                     ))}
                 </div>
-                <a
-                    href="https://kravix.ch"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={cm("mt-3 block rounded-xl border border-[#bfe9f5] bg-accent-soft px-4 py-3.5 text-center"
-                        , "cursor-pointer transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-accent"
-                        , "hover:bg-white hover:shadow-md font-medium")}
-                >
-                    <span>{t.rich('kravix.more', richTags)}</span>
-                </a>
+                <div className="relative mt-2.5 overflow-hidden rounded-xl border border-line-soft">
+                    <div aria-hidden className="pointer-events-none select-none space-y-2.5 blur-[4px]">
+                        {teaserProjects.map((project, i) => (
+                            <div key={i}
+                                 className={cm("rounded-xl border border-line-soft bg-bg px-4 py-3.5", i > 0 && "hidden md:block")}>
+                                <span className="text-sm font-semibold">{project.title}</span>
+                                <p className="mb-2 mt-1.5 text-sm text-mute">{project.desc}</p>
+                                {project.stacks.map((stack, j) => (
+                                    <StackBlock key={j} stack={stack}/>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gradient-to-b from-card/25 via-card/60 to-card/85 px-4 text-center">
+                        <p className="text-base font-medium text-mute">{t.rich('kravix.more', richTags)}</p>
+                        <a
+                            href="https://kravix.ch"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={cm("inline-flex items-center gap-2 rounded-xl border border-[#bfe9f5] bg-accent-soft px-4 py-2.5 text-sm font-medium"
+                                , "cursor-pointer transition-all duration-400 ease-out hover:border-accent"
+                                , "hover:bg-white hover:shadow-md")}
+                        >
+                            <span>{t('kravix.cta')}</span>
+                            <SquareArrowOutUpRight className="h-4 w-4" />
+                        </a>
+                    </div>
+                </div>
             </JobCard>
         </section>
     )
