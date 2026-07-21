@@ -1,0 +1,124 @@
+{
+  "meta": {
+    "title": "Maksym Kravchenko | Lebenslauf",
+    "description": "Maksym Kravchenko Fullstack-Entwickler aus dem Thurgau, Schweiz. .NET, modernes Web und selbstgehostete Infrastruktur."
+  },
+  "localeSwitcher": {
+    "label": "Sprache"
+  },
+  "hero": {
+    "eyebrow": "Lebenslauf",
+    "name": "Maksym <accent>Kravchenko</accent>",
+    "role": "Fullstack-Entwickler",
+    "intro": "Ich stamme ursprünglich aus der Ukraine und lebe derzeit im Thurgau, Schweiz. Ich programmiere seit fast 7 Jahren und habe knapp 3 Jahre praktische Erfahrung in der Entwicklung und Auslieferung realer Softwareprojekte. Tagsüber bin ich Entwickler bei der Beat Bucher AG; nebenbei führe ich <b>Kravix Solutions</b> und arbeite mit meinen eigenen Freelance-Kunden."
+  },
+  "contacts": {
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "website": "Webseite",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "location": "Standort",
+    "locationValue": "Thurgau, CH"
+  },
+  "stackLabels": {
+    "frontend": "Frontend",
+    "backend": "Backend"
+  },
+  "experience": {
+    "eyebrow": "Berufserfahrung",
+    "title": "Wo ich <accent>arbeite</accent>.",
+    "at": "bei",
+    "beatBucher": {
+      "role": "Softwareentwickler",
+      "company": "Beat Bucher AG",
+      "period": "2024 - Heute",
+      "bullets": [
+        "Entwicklung und Wartung interner Anwendungen für die Marketingabteilung",
+        "Entwicklung von Full-Stack-Funktionen für eine neue Version des Firmen-Webshops",
+        "Entwicklung eines neuen CMS von Grund auf zur Verwaltung aller Firmendaten",
+        "Tägliche Datenbankarbeit: Modellierung, Abfragen und Betrieb von Produktionsdaten",
+        "Arbeit mit GitHub Actions für CI/CD ohne Ausfallzeiten",
+        "Testing und Code-Reviews, um Codebasis und Architektur sauber und wartbar zu halten",
+        "Umsetzung von Figma-Designs und Unterstützung der Kollegen bei der täglichen IT"
+      ]
+    },
+    "kravix": {
+      "role": "Gründer & freiberuflicher Fullstack-Entwickler",
+      "company": "Kravix Solutions",
+      "period": "2025 - Heute",
+      "lead": "Ein kleines Software-Studio, das Web-Apps für Kunden und selbstgehostete Infrastruktur baut. Marketing-Seiten, produktives Kubernetes und fast alles dazwischen.",
+      "more": "Mehr Projekten auf <accentStrong>Kravix Solutions</accentStrong>",
+      "projects": {
+        "led": {
+          "title": "LED-Produkt-Landingpage",
+          "desc": "Mehrsprachige Landingpage für eine LED-Produktlinie mit facettierter Filterung und konfigurierbaren, variantenspezifischen Daten auf MSSQL-Basis."
+        },
+        "kinetika": {
+          "title": "Kinetika",
+          "desc": "Portfolio-Web-App für ein Schweizer Fotostudio, angetrieben von einem <b>massgeschneiderten Headless-CMS</b> (von mir selbst gebaut) für sofortige Inhaltsänderungen ohne erneutes Deployment. Dockerisiert, mehrsprachig."
+        },
+        "k8s": {
+          "title": "Selbstgehostete Kubernetes-Plattform",
+          "desc": "Rancher-verwaltetes Cluster mit einer GitHub-Actions-Pipeline zum Bauen und Veröffentlichen in GHCR, rollierende Deployments ohne Ausfallzeiten und Observability mit Prometheus/Grafana."
+        }
+      }
+    }
+  },
+  "education": {
+    "eyebrow": "Ausbildung",
+    "title": "Wo ich <accent>lerne</accent>.",
+    "items": {
+      "bzt": {
+        "when": "2025 - 2029",
+        "school": "Bildungszentrum für Technik BZT",
+        "degree": "Informatik: Softwareentwicklung"
+      },
+      "nus": {
+        "when": "2022 - 2026",
+        "school": "Nationale Universität für Schiffbau (Ukraine)",
+        "degree": "BSc Informatik: Systemanalyse"
+      },
+      "itschool": {
+        "when": "2020 - 2022",
+        "school": "IT School",
+        "degree": "Programmiergrundlagen, Wettbewerbsprogrammierung"
+      }
+    }
+  },
+  "skills": {
+    "eyebrow": "Tech-Stack",
+    "title": "Womit ich <accent>arbeite</accent>.",
+    "categories": {
+      "languages": "Sprachen",
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "data": "Daten",
+      "devops": "DevOps & Infra"
+    }
+  },
+  "soft": {
+    "eyebrow": "Soft Skills",
+    "title": "Wie ich <accent>zusammenarbeite</accent>.",
+    "items": [
+      "Pair Programming",
+      "Teamarbeit",
+      "SCRUM",
+      "Loop-Ansatz",
+      "Effektive Kommunikation",
+      "Führung",
+      "Kritisches Denken",
+      "Zeitmanagement"
+    ]
+  },
+  "languages": {
+    "eyebrow": "Sprachen",
+    "title": "Was ich <accent>spreche</accent>.",
+    "items": {
+      "english": { "name": "Englisch", "level": "C1 | Cambridge" },
+      "german": { "name": "Deutsch", "level": "B2 (C1) | telc" },
+      "ukrainian": { "name": "Ukrainisch", "level": "Muttersprache" },
+      "russian": { "name": "Russisch", "level": "Fliessend" }
+    }
+  }
+}
