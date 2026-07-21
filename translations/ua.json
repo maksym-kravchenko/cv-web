@@ -48,7 +48,8 @@
       "company": "Kravix Solutions",
       "period": "2025 - дотепер",
       "lead": "Невелика софтверна студія, що створює вебзастосунки для клієнтів і self-hosted інфраструктуру. Маркетингові сайти, продакшн-Kubernetes і майже все поміж ними.",
-      "more": "Більше проєктів на <accentStrong>Kravix Solutions</accentStrong>",
+      "more": "Усі проєкти на сайті <accentStrong>Kravix Solutions</accentStrong>",
+      "cta": "Перейти на сайт",
       "projects": {
         "led": {
           "title": "Лендинг LED-продукту",
@@ -68,6 +69,13 @@
   "education": {
     "eyebrow": "Освіта",
     "title": "Де я <accent>навчаюся</accent>.",
+    "certificate": "Сертифікат",
+    "certificates": {
+      "icpc_2022": "45-й щорічний світовий фінал Міжнародного студентського чемпіонату з програмування (ICPC)",
+      "icpc_2022_local": "Міжнародний студентський чемпіонат з програмування (ICPC): 1/8 фіналу",
+      "apps_contest_2023": "Підсумкова науково-практична конференція конкурсу проєктів",
+      "cambridge_C1_Statement_Of_Result": "Cambridge C1: довідка про результати"
+    },
     "items": {
       "bzt": {
         "when": "2025 - 2029",

@@ -48,7 +48,8 @@
       "company": "Kravix Solutions",
       "period": "2025 - Heute",
       "lead": "Ein kleines Software-Studio, das Web-Apps für Kunden und selbstgehostete Infrastruktur baut. Marketing-Seiten, produktives Kubernetes und fast alles dazwischen.",
-      "more": "Mehr Projekten auf <accentStrong>Kravix Solutions</accentStrong>",
+      "more": "Alle Projekte auf der <accentStrong>Kravix Solutions</accentStrong> Website ansehen",
+      "cta": "Zur Website",
       "projects": {
         "led": {
           "title": "LED-Produkt-Landingpage",
@@ -68,6 +69,13 @@
   "education": {
     "eyebrow": "Ausbildung",
     "title": "Wo ich <accent>lerne</accent>.",
+    "certificate": "Zertifikat",
+    "certificates": {
+      "icpc_2022": "45. jährliches Weltfinale des International Collegiate Programming Contest (ICPC)",
+      "icpc_2022_local": "International Collegiate Programming Contest (ICPC): Achtelfinale",
+      "apps_contest_2023": "Abschliessende wissenschaftlich-praktische Konferenz des Projektwettbewerbs",
+      "cambridge_C1_Statement_Of_Result": "Cambridge C1 Ergebnismitteilung"
+    },
     "items": {
       "bzt": {
         "when": "2025 - 2029",
