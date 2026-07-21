@@ -85,7 +85,10 @@ export const certificates: Partial<Record<EducationKey, Certificate[]>> = {
       { file: 'icpc_2022_local.pdf', label: 'icpc_2022_local', locale: 'en' },
       { file: 'apps_contest_2023.pdf', label: 'apps_contest_2023', locale: 'ua' },
   ],
-  bzt: [{ file: 'Cambridge_C1_Statement_Of_Result.pdf', label: 'cambridge_C1_Statement_Of_Result', locale: 'en' },],
+  bzt: [
+      { file: 'Cambridge_C1_Statement_Of_Result.pdf', label: 'cambridge_C1_Statement_Of_Result', locale: 'en' },
+      { file: 'B2-telc.pdf', label: 'b2-telc', locale: 'de' },
+  ],
 }
 
 export const languageKeys = ['english', 'german', 'ukrainian', 'russian'] as const
