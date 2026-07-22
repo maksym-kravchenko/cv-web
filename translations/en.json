@@ -70,12 +70,34 @@
     "eyebrow": "Education",
     "title": "Where I <accent>learn</accent>.",
     "certificate": "Certificate",
+    "certificatesTitle": "Certificates & Awards",
+    "certificateGroups": {
+      "competitions": "Competitions",
+      "languages": "Language Exams"
+    },
     "certificates": {
-      "icpc_2022": "45th Annual World Finals of the International Collegiate Programming (ICPC)",
-      "icpc_2022_local": "International Collegiate Programming Contest (ICPC): 1/8 Finals",
-      "apps_contest_2023": "Final Scientific and Practical Conference of the Project Competition",
-      "cambridge_C1_Statement_Of_Result": "Cambridge C1 Statement Of Result",
-      "b2-telc": "Telc B2 German Certificate"
+      "icpc_2022": {
+        "title": "ICPC World Finals",
+        "subtitle": "45th Annual World Finals"
+      },
+      "icpc_2022_local": {
+        "title": "ICPC 1/8 Finals",
+        "subtitle": "Regional round",
+        "highlight": "advanced to quarterfinals"
+      },
+      "apps_contest_2023": {
+        "title": "Project competition (final conference)",
+        "subtitle": "Scientific and practical conference",
+        "highlight": "mobile-app presentation"
+      },
+      "cambridge_C1_Statement_Of_Result": {
+        "title": "Cambridge English C1 Advanced",
+        "subtitle": "Statement of Results"
+      },
+      "b2-telc": {
+        "title": "telc Deutsch B2",
+        "subtitle": "German language certificate"
+      }
     },
     "items": {
       "bzt": {

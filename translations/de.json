@@ -70,12 +70,34 @@
     "eyebrow": "Ausbildung",
     "title": "Wo ich <accent>lerne</accent>.",
     "certificate": "Zertifikat",
+    "certificatesTitle": "Zertifikate & Auszeichnungen",
+    "certificateGroups": {
+      "competitions": "Wettbewerbe",
+      "languages": "Sprachprüfungen"
+    },
     "certificates": {
-      "icpc_2022": "45. jährliches Weltfinale des International Collegiate Programming Contest (ICPC)",
-      "icpc_2022_local": "International Collegiate Programming Contest (ICPC): Achtelfinale",
-      "apps_contest_2023": "Abschliessende wissenschaftlich-praktische Konferenz des Projektwettbewerbs",
-      "cambridge_C1_Statement_Of_Result": "Cambridge C1 Ergebnismitteilung",
-      "b2-telc": "Telc Deutsch B2 Zertifikat"
+      "icpc_2022": {
+        "title": "ICPC-Weltfinale",
+        "subtitle": "45. jährliches Weltfinale"
+      },
+      "icpc_2022_local": {
+        "title": "ICPC Achtelfinale",
+        "subtitle": "Regionalrunde",
+        "highlight": "Viertelfinale erreicht"
+      },
+      "apps_contest_2023": {
+        "title": "Projektwettbewerb (Abschlusskonferenz)",
+        "subtitle": "Wissenschaftlich-praktische Konferenz",
+        "highlight": "Präsentation der mobilen App"
+      },
+      "cambridge_C1_Statement_Of_Result": {
+        "title": "Cambridge English C1 Advanced",
+        "subtitle": "Ergebnismitteilung"
+      },
+      "b2-telc": {
+        "title": "telc Deutsch B2",
+        "subtitle": "Deutsch-Sprachzertifikat"
+      }
     },
     "items": {
       "bzt": {
