@@ -70,12 +70,34 @@
     "eyebrow": "Освіта",
     "title": "Де я <accent>навчаюся</accent>.",
     "certificate": "Сертифікат",
+    "certificatesTitle": "Сертифікати та нагороди",
+    "certificateGroups": {
+      "competitions": "Змагання",
+      "languages": "Мовні іспити"
+    },
     "certificates": {
-      "icpc_2022": "45-й щорічний світовий фінал Міжнародного студентського чемпіонату з програмування (ICPC)",
-      "icpc_2022_local": "Міжнародний студентський чемпіонат з програмування (ICPC): 1/8 фіналу",
-      "apps_contest_2023": "Підсумкова науково-практична конференція конкурсу проєктів",
-      "cambridge_C1_Statement_Of_Result": "Cambridge C1: довідка про результати",
-      "b2-telc": "Сертифікат Telc з Німецької B2"
+      "icpc_2022": {
+        "title": "Світовий фінал ICPC",
+        "subtitle": "45-й щорічний світовий фінал"
+      },
+      "icpc_2022_local": {
+        "title": "1/8 фіналу ICPC",
+        "subtitle": "Регіональний етап",
+        "highlight": "вихід у чвертьфінал"
+      },
+      "apps_contest_2023": {
+        "title": "Конкурс проєктів (підсумкова конференція)",
+        "subtitle": "Науково-практична конференція",
+        "highlight": "презентація мобільного додатка"
+      },
+      "cambridge_C1_Statement_Of_Result": {
+        "title": "Cambridge English C1 Advanced",
+        "subtitle": "Довідка про результати"
+      },
+      "b2-telc": {
+        "title": "telc Deutsch B2",
+        "subtitle": "Сертифікат з німецької мови"
+      }
     },
     "items": {
       "bzt": {

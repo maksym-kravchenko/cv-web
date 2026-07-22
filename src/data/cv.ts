@@ -77,18 +77,23 @@ export const skillGroups: SkillGroup[] = [
 export const educationKeys = ['bzt', 'nus', 'itschool'] as const
 export type EducationKey = (typeof educationKeys)[number]
 
-export type Certificate = { file: string; label?: string; locale?: string }
+export const certificateGroupKeys = ['languages', 'competitions'] as const
+export type CertificateGroup = (typeof certificateGroupKeys)[number]
 
-export const certificates: Partial<Record<EducationKey, Certificate[]>> = {
-  nus: [
-      { file: 'icpc_2022.pdf', label: 'icpc_2022', locale: 'en' },
-      { file: 'icpc_2022_local.pdf', label: 'icpc_2022_local', locale: 'en' },
-      { file: 'apps_contest_2023.pdf', label: 'apps_contest_2023', locale: 'ua' },
-  ],
-  bzt: [
-      { file: 'Cambridge_C1_Statement_Of_Result.pdf', label: 'cambridge_C1_Statement_Of_Result', locale: 'en' },
-      { file: 'B2-telc.pdf', label: 'b2-telc', locale: 'de' },
-  ],
+export type Certificate = {
+  file: string
+  group: CertificateGroup
+  label?: string
+  locale?: string
+  date?: string
 }
+
+export const certificates: Certificate[] = [
+  { file: 'icpc_2022.pdf', label: 'icpc_2022', locale: 'en', date: '2022', group: 'competitions' },
+  { file: 'icpc_2022_local.pdf', label: 'icpc_2022_local', locale: 'en', date: '2022', group: 'competitions' },
+  { file: 'apps_contest_2023.pdf', label: 'apps_contest_2023', locale: 'ua', date: '2023', group: 'competitions' },
+  { file: 'Cambridge_C1_Statement_Of_Result.pdf', label: 'cambridge_C1_Statement_Of_Result', locale: 'en', date: '2026', group: 'languages' },
+  { file: 'B2-telc.pdf', label: 'b2-telc', locale: 'de', date: '2025', group: 'languages' },
+]
 
 export const languageKeys = ['english', 'german', 'ukrainian', 'russian'] as const
