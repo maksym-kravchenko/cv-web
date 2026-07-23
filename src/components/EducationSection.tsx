@@ -34,38 +34,41 @@ function CertificateRow({
         rel="noopener noreferrer"
         title={title}
         aria-label={title}
-        className="group flex items-center gap-3 ps-3 pe-5 py-2.5  transition-colors duration-200 hover:bg-bg"
+        className="group flex gap-3 ps-3 pe-5 py-2.5 transition-colors duration-200 hover:bg-bg items-center"
       >
         <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent-strong transition-colors duration-200 group-hover:bg-accent group-hover:text-white">
           <Icon className="h-4.5 w-4.5" strokeWidth={2} />
         </span>
 
-        <span className="min-w-0 flex-1">
-          <span className="block text-sm font-semibold leading-snug text-fg">{title}</span>
-          {subtitle || highlight ? (
-            <span className="mt-0.5 block text-[12.5px] leading-snug text-mute">
-              {subtitle}
-              {highlight ? (
-                <>
-                  {subtitle ? ' · ' : ''}
-                  <span className="font-medium text-accent-strong">{highlight}</span>
-                </>
-              ) : null}
-            </span>
-          ) : null}
-        </span>
+        <div className="flex min-w-0 flex-1 flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-3">
+          <div className="min-w-0 sm:flex-1">
+            <span className="block text-sm font-semibold leading-snug text-fg">{title}</span>
+            {subtitle || highlight ? (
+              <span className="mt-0.5 block text-[12.5px] leading-snug text-mute">
+                {subtitle}
+                {highlight ? (
+                  <>
+                    {subtitle ? ' · ' : ''}
+                    <span className="font-medium text-accent-strong">{highlight}</span>
+                  </>
+                ) : null}
+              </span>
+            ) : null}
+          </div>
 
-        {cert.date ? (
-          <span className="shrink-0 font-mono text-xs text-sub">{cert.date}</span>
-        ) : null}
-
-        {cert.locale ? (
-            <span className="shrink-0 rounded-full border border-line bg-card px-2 py-1 font-mono text-[10px] font-semibold uppercase leading-none tracking-wide text-sub">
-                              {cert.locale}
-                            </span>
-        ) : null}
+          <div className="flex shrink-0 items-center gap-2">
+            {cert.date ? (
+              <span className="font-mono text-xs text-sub">{cert.date}</span>
+            ) : null}
+            {cert.locale ? (
+              <span className="rounded-full border border-line bg-card px-2 py-1 font-mono text-[10px] font-semibold uppercase leading-none tracking-wide text-sub">
+                {cert.locale}
+              </span>
+            ) : null}
+          </div>
+        </div>
         <SquareArrowOutUpRight
-            className="h-3.5 w-3.5 shrink-0 text-mute transition-colors group-hover:text-accent-strong"
+            className="h-3.5 w-3.5 text-mute transition-colors group-hover:text-accent-strong"
             strokeWidth={2}
         />
       </a>
