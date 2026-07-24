@@ -151,5 +151,10 @@
       "ukrainian": { "name": "Ukrainisch", "level": "Muttersprache" },
       "russian": { "name": "Russisch", "level": "Fliessend" }
     }
+  },
+  "footer": {
+    "rights": "Alle Rechte vorbehalten.",
+    "imprint": "Impressum",
+    "privacy": "Datenschutz"
   }
 }
