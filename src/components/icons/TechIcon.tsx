@@ -17,6 +17,7 @@ const techMeta = {
   githubactions: { label: 'GitHub Actions', color: '#2088FF' },
   prometheus: { label: 'Prometheus', color: '#E6522C' },
   grafana: { label: 'Grafana', color: '#F46800' },
+  cloudflare: { label: 'Cloudflare', color: '#F38020' },
   dotnet: { label: '.NET', color: '#512BD4' },
   bootstrap: { label: 'Bootstrap', color: '#7952B3' },
   mysql: { label: 'MySQL', color: '#4479A1' },

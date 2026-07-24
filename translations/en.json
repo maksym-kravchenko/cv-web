@@ -151,5 +151,10 @@
       "ukrainian": { "name": "Ukrainian", "level": "Native" },
       "russian": { "name": "Russian", "level": "Fluent" }
     }
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "imprint": "Imprint",
+    "privacy": "Privacy"
   }
 }

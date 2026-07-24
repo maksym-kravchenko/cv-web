@@ -34,7 +34,7 @@ export const beatBucherStacks: Stack[] = [
   { labelKey: 'frontend', tech: webFrontend },
   {
     labelKey: 'backend',
-    tech: ['dotnet', 'csharp', 'swagger', 'ef', 'sqlserver', 'githubactions', 'docker'],
+    tech: ['dotnet', 'csharp', 'swagger', 'ef', 'sqlserver', 'githubactions', 'docker', 'cloudflare'],
   },
 ]
 
@@ -71,7 +71,7 @@ export const skillGroups: SkillGroup[] = [
   { key: 'backend', tech: ['dotnet', 'laravel', 'filament', 'swagger', 'blazor', 'restapis'] },
   { key: 'frontend', tech: ['react', 'nextdotjs', 'tailwindcss', 'blazor', 'bootstrap'] },
   { key: 'data', tech: ['sqlserver', 'mysql', 'ef'] },
-  { key: 'devops', tech: ['github', 'docker', 'kubernetes', 'rancher', 'githubactions', 'prometheus', 'grafana'] },
+  { key: 'devops', tech: ['github', 'docker', 'kubernetes', 'rancher', 'githubactions', 'cloudflare', 'prometheus', 'grafana'] },
 ]
 
 export const educationKeys = ['bzt', 'nus', 'itschool'] as const
