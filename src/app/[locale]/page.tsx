@@ -6,6 +6,7 @@ import { EducationSection } from '@/components/EducationSection'
 import { SkillsSection } from '@/components/SkillsSection'
 import { SoftAndLanguages } from '@/components/SoftAndLanguages'
 import { LocaleSwitcher } from '@/components/LocaleSwitcher'
+import { Footer } from '@/components/Footer'
 
 type PageProps = {
   params: Promise<{ locale: string }>
@@ -26,6 +27,7 @@ export default async function Home({ params }: PageProps) {
       <EducationSection />
       <SkillsSection />
       <SoftAndLanguages />
+      <Footer />
     </main>
   )
 }
