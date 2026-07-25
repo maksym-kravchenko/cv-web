@@ -164,25 +164,6 @@ jobs:
           echo "${{ secrets.KUBECONFIG_B64 }}" | base64 -d > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
 
-      - name: Install sops
-        run: |
-          SOPS_VERSION=v3.9.4
-          curl -sSL -o /usr/local/bin/sops \
-            https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.amd64
-          chmod +x /usr/local/bin/sops
-
-      - name: Sync config, secret and network policy
-        env:
-          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
-        run: |
-          kubectl apply -f k8s/configmap.yaml
-          kubectl apply -f k8s/redis-netpol.yaml
-          if [ -n "$SOPS_AGE_KEY" ] && [ -f k8s/secret.sops.yaml ]; then
-            sops --decrypt k8s/secret.sops.yaml | kubectl apply -f -
-          else
-            echo "SOPS_AGE_KEY or k8s/secret.sops.yaml missing; skipping secret sync."
-          fi
-
       - name: Set version override
         run: |
           kubectl set env deployment/cv-app -n cv-app \

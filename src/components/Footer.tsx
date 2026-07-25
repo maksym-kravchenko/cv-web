@@ -1,4 +1,7 @@
 import { useTranslations } from 'next-intl'
+import pkg from '../../package.json'
+
+const APP_VERSION = `v${pkg.version}`
 
 export function Footer() {
   const t = useTranslations('footer')
@@ -18,6 +21,7 @@ export function Footer() {
             Kravix Solutions
           </a>
           . {t('rights')}
+          <span> {APP_VERSION}</span>
         </p>
         <nav className="flex items-center gap-4 font-mono text-[11px] uppercase tracking-[0.12em] text-sub">
           <a
