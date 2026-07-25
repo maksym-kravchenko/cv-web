@@ -15,7 +15,7 @@ type PageProps = {
 export default async function Home({ params }: PageProps) {
   const { locale } = await params
   setRequestLocale(locale)
-
+/*test*/
   return (
     <main className="mx-auto max-w-5xl px-5 py-8 md:my-5 md:px-10 md:py-15">
       <div className="mb-8 flex justify-end">
