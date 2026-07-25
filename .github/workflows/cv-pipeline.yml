@@ -1,0 +1,207 @@
+name: CV Pipeline
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - 'README.md'
+      - 'k8s/**'
+      - '.github/**'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Existing semver version to (re)deploy, e.g. 0.1.1 for rollbacks. Skips build + bump.'
+        required: true
+
+concurrency:
+  group: cv-pipeline
+  cancel-in-progress: false
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image_tag: ${{ steps.sha.outputs.short }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Compute short SHA
+        id: sha
+        run: echo "short=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_OUTPUT
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.sha.outputs.short }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          build-args: |
+            APP_VERSION=${{ steps.sha.outputs.short }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  bump-version:
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      version: ${{ steps.bump_version.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Decide bump type
+        id: type
+        run: |
+          MSG=$(git log -1 --pretty=%B)
+          BUMP=patch
+          # feat: ... -> minor
+          if echo "$MSG" | grep -qiE '^feat(\(.+\))?!?:'; then BUMP=minor; fi
+          # "type!:" or a "BREAKING CHANGE" footer -> major (checked last so it wins)
+          if echo "$MSG" | grep -qiE '^[a-z]+(\(.+\))?!:'; then BUMP=major; fi
+          if echo "$MSG" | grep -qi 'BREAKING CHANGE'; then BUMP=major; fi
+          echo "Commit subject: $(echo "$MSG" | head -1)"
+          echo "Bump type: $BUMP"
+          echo "type=$BUMP" >> $GITHUB_OUTPUT
+
+      - name: Configure git author
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump package.json version and create tag
+        id: bump_version
+        run: |
+          NEW=$(npm version ${{ steps.type.outputs.type }} -m "chore(release): %s [skip ci]")
+          echo "version=${NEW#v}" >> $GITHUB_OUTPUT
+
+      - name: Push commit + tag
+        run: git push --follow-tags
+
+  deploy:
+    needs: [build, bump-version]
+    if: >-
+      always() &&
+      (
+        (github.event_name == 'push' && needs.build.result == 'success' && needs.bump-version.result == 'success')
+        || github.event_name == 'workflow_dispatch'
+      )
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve version
+        id: version
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            VERSION="${{ inputs.version }}"
+            VERSION="${VERSION#v}"
+          else
+            VERSION="${{ needs.bump-version.outputs.version }}"
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Deploying version $VERSION"
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Tag SHA image as semver
+        if: github.event_name == 'push'
+        run: |
+          docker buildx imagetools create \
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.image_tag }} \
+            --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version }}
+
+      - name: Verify semver image exists
+        run: |
+          docker manifest inspect ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version }} > /dev/null
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Configure kubeconfig
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBECONFIG_B64 }}" | base64 -d > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
+
+      - name: Install sops
+        run: |
+          SOPS_VERSION=v3.9.4
+          curl -sSL -o /usr/local/bin/sops \
+            https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.amd64
+          chmod +x /usr/local/bin/sops
+
+      - name: Sync config, secret and network policy
+        env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+        run: |
+          kubectl apply -f k8s/configmap.yaml
+          kubectl apply -f k8s/redis-netpol.yaml
+          if [ -n "$SOPS_AGE_KEY" ] && [ -f k8s/secret.sops.yaml ]; then
+            sops --decrypt k8s/secret.sops.yaml | kubectl apply -f -
+          else
+            echo "SOPS_AGE_KEY or k8s/secret.sops.yaml missing; skipping secret sync."
+          fi
+
+      - name: Set version override
+        run: |
+          kubectl set env deployment/cv-app -n cv-app \
+            APP_VERSION_OVERRIDE=${{ steps.version.outputs.version }}
+
+      - name: Update deployment image
+        run: |
+          kubectl set image deployment/cv-app \
+            app=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version }} \
+            -n cv-app
+
+      - name: Annotate deployment with version
+        run: |
+          kubectl annotate deployment/cv-app \
+            app.kravix.ch/version=${{ steps.version.outputs.version }} \
+            -n cv-app --overwrite
+
+      - name: Wait for rollout
+        run: kubectl rollout status deployment/cv-app -n cv-app --timeout=2m
+
+      - name: Show deployed pods
+        run: kubectl get pods -n cv-app -o wide
