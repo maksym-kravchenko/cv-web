@@ -13,7 +13,7 @@ import {richTags} from '@/utils/rich'
 import cm from '@/utils/cm'
 import {Eyebrow} from './Eyebrow'
 
-const photos = ['/photo.jpg', '/photo1.jpg', '/photo2.jpg']
+const photos = ['/photo.jpg', '/photo1.jpg', '/photo2.jpg', '/photo3.jpg']
 
 export function Hero() {
     const t = useTranslations('hero')
