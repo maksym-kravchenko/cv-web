@@ -47,7 +47,7 @@ export function Hero() {
                 >
                     {photos.map((src, i) => (
                         <SwiperSlide key={src}>
-                            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-line bg-bg-soft md:aspect-[3/3.5]">
+                            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl  border border-line bg-bg-soft md:aspect-[3/3.5]">
                                 <Image
                                     src={src}
                                     alt={`Maksym Kravchenko / ${i}`}
