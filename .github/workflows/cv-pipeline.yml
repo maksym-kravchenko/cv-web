@@ -58,6 +58,7 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           build-args: |
             APP_VERSION=${{ steps.sha.outputs.short }}
+          pull: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -164,6 +165,21 @@ jobs:
           echo "${{ secrets.KUBECONFIG_B64 }}" | base64 -d > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
 
+      - name: Connect to NetBird
+        env:
+          NB_SETUP_KEY: ${{ secrets.NETBIRD_SETUP_KEY }}
+        run: |
+          curl -fsSL https://pkgs.netbird.io/install.sh | sh
+          sudo netbird up --setup-key "$NB_SETUP_KEY" --hostname "gh-${{ github.run_id }}"
+          API=$(kubectl config view --minify -o jsonpath='{.clusters[0].cluster.server}' | sed -E 's#https?://##')
+          HOST=${API%:*}; PORT=${API##*:}
+          for i in $(seq 1 30); do
+            nc -z -w 2 "$HOST" "$PORT" && { echo "k8s API $HOST:$PORT reachable"; exit 0; }
+            sleep 2
+          done
+          sudo netbird status -d
+          exit 1
+
       - name: Set version override
         run: |
           kubectl set env deployment/cv-app -n cv-app \
@@ -186,3 +202,7 @@ jobs:
 
       - name: Show deployed pods
         run: kubectl get pods -n cv-app -o wide
+
+      - name: Disconnect NetBird
+        if: always()
+        run: sudo netbird down || true
