@@ -21,6 +21,7 @@ export default async function Home({ params }: PageProps) {
       <div className="mb-8 flex justify-end">
         <LocaleSwitcher />
       </div>
+
       <Hero />
       <Contacts />
       <ExperienceSection />
