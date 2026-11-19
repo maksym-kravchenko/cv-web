@@ -3,14 +3,16 @@ kind: Ingress
 metadata:
   name: cv-app
   namespace: cv-app
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+  # No cert-manager. TLS uses the Cloudflare Origin CA certificate for
+  # *.kravix.ch in the secret origin-tls (kravix-web/k8s/traefik/MIGRATION.md,
+  # phase 1). Only Cloudflare trusts it, browsers don't, so the DNS record
+  # must stay proxied (orange cloud).
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   tls:
     - hosts:
         - cv.kravix.ch
-      secretName: cv-app-tls
+      secretName: origin-tls
   rules:
     - host: cv.kravix.ch
       http:
